@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['foreign-room-4472785d13b2.herokuapp.com' , 'foreign-room.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['8000-gassama94-foreignroom-o9udp9e1crm.ws-eu104.gitpod.io', 'foreign-room-4472785d13b2.herokuapp.com' , 'foreign-room.herokuapp.com', 'localhost']
 
 
 # Application definition
