@@ -10,6 +10,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 class Post(models.Model):
     title = models.CharField(max_length=255, unique=True)
+    title_tag = models.CharField(max_length=255, default='Foreign-Room')
     author = models. ForeignKey(
         User, on_delete=models.CASCADE, related_name="blog_posts")
     content = models.TextField()
