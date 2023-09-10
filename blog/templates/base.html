@@ -1,5 +1,6 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="h-100">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -18,6 +19,13 @@
       integrity="sha384-PRrgQVJ8NNHGieOA1grGdCTIt4h21CzJs6SnWH4YMQ6G5F5+IEzOHz67L4SQaF0o"
       crossorigin="anonymous"
     />
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/682245f2ad.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--  -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     <title>{% block title %} Foreign-Room! {% endblock %}</title>
   </head>
@@ -48,7 +56,9 @@
     </nav>
     <!-- navbar Close -->
     <br />
-    <div class="container">{% block content %} {% endblock %}</div>
+    <main class="flex-shrink-0 main-bg">
+      <div class="container">{% block content %} {% endblock %}</div>
+    </main>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
