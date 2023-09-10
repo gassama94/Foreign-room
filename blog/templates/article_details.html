@@ -6,6 +6,9 @@
   <a href="{% url 'update_post' post.pk %}">(Edit)</a>
   <a href="{% url 'delete_post' post.pk %}">(Delete)</a> </small
 ><br />
+<small>
+  <i> {{ post.created_on }} </i>
+</small>
 <hr />
 <br />
 {{ post.content|safe }}
