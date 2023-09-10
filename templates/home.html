@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Post</h1>
+<div class="container-fluid shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+  <div class="">
+    <ul>
+      {% for post in object_list %}
+
+      <li class="shadow p-3 mb-5 bg-body-primary rounded">
+        <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> -
+        <i
+          >{{ post.author.first_name }} {{ post.author.last_name }} -
+          <small>
+            <i> {{ post.created_on }} </i>
+          </small>
+          -
+          <small>
+            <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+            <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+            <i class="far fa-heart"> {{ post.number_of_likes}}</i>
+          </small> </i
+        ><br />
+
+        <hr />
+        <div>{{ post.content|safe }}</div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

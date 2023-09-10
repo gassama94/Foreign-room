@@ -18,7 +18,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE, related_name="blog_posts")
     content = models.TextField()
     updated_on = models.DateTimeField(auto_now=True)
-    #featured_image = CloudinaryField('image', default='placeholder')
+    featured_image = CloudinaryField('image', default='placeholder')
     #excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models. IntegerField(choices=STATUS, default=0)
