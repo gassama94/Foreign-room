@@ -2,6 +2,10 @@
 
 <br />
 {% block content %}
+<!--  -->
+{% if user.is_authenticated %}
+<!--  -->
+{% if user.id == post.author.id %}
 <h1>Delete Post....!</h1>
 <br />
 <h3>Delete: {{ post.title }}</h3>
@@ -17,4 +21,12 @@
     </form>
   </div>
 </div>
+{% else %}
+<h1>You're not allowed here!!!</h1>
+{% endif %}
+<!--  -->
+{% else %}
+<h1>You're not allowed here!!!</h1>
+{% endif %}
+<br />
 {% endblock %}

@@ -15,8 +15,12 @@
           </small>
           -
           <small>
+            {% if user.is_authenticated %}
+            <!-- if the user is logged in -->
+            {% if user.id == post.author.id %}
             <a href="{% url 'update_post' post.pk %}">(Edit)</a>
             <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+            {% endif %} {% endif %}
             <i class="far fa-heart"> {{ post.number_of_likes}}</i>
           </small> </i
         ><br />
