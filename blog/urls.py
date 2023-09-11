@@ -1,7 +1,7 @@
 from django.urls import path
 #from allauth.account.views import LoginView
 # from . import views
-from .views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView
+from .views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, LikeView
 
 urlpatterns = [
     path('', HomeView.as_view(), name="home"),
@@ -9,6 +9,8 @@ urlpatterns = [
     path('add_post/', AddPostView.as_view(), name="add_post"),
     path('article/edit/<int:pk>/', UpdatePostView.as_view(), name="update_post"),
     path('article/<int:pk>/remove/', DeletePostView.as_view(), name="delete_post"),
+    path('article/<int:pk>/remove/', DeletePostView.as_view(), name="delete_post"),
+    path('like/<int:pk>/remove/', LikeView, name="like_post"),
     #path('accounts/login/', LoginView.as_view(), name="account_login"),
 ]
 

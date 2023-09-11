@@ -8,8 +8,8 @@
 
       <li class="shadow p-3 mb-5 bg-body-primary rounded">
         <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a> -
-        <i
-          >{{ post.author.first_name }} {{ post.author.last_name }} -
+        <i>
+          {{ post.author.first_name }} {{ post.author.last_name }} -
           <small>
             <i> {{ post.created_on }} </i>
           </small>
@@ -21,10 +21,9 @@
             <a href="{% url 'update_post' post.pk %}">(Edit)</a>
             <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
             {% endif %} {% endif %}
-            <i class="far fa-heart"> {{ post.number_of_likes}}</i>
-          </small> </i
-        ><br />
-
+          </small>
+        </i>
+        <br />
         <hr />
         <div>{{ post.content|safe }}</div>
       </li>

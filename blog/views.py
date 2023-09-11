@@ -1,12 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from .forms import PostForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 # def home(request):
 # return render(request, 'home.html', {})
+
+
+def LikeView(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+
+    if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+    else:
+            post.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
+       
+
 
 
 class HomeView(ListView):
