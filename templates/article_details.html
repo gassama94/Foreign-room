@@ -28,16 +28,35 @@
 <br />
 <hr />
 <br />
-<form action="{% url 'like_post' post.pk %}" method="POST">
-  {% csrf_token %}
-  <button
-    class="btn btn-success"
-    type="submit"
-    name="post_id"
-    value="{{ post.id }}"
-  >
-    Like
-  </button>
-  - {{ post.number_of_likes }} Likes
-</form>
+<strong>
+  {% if user.is_authenticated %}
+  <form action="{% url 'like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    <!--  -->
+    {% if liked %}
+    <button
+      type="submit"
+      name="post_id"
+      value="{{post.id}}"
+      class="btn btn-danger"
+    >
+      Unlike
+    </button>
+    {% else %}
+    <button
+      type="submit"
+      name="post_id"
+      value="{{post.id}}"
+      class="btn btn-success"
+    >
+      Like
+    </button>
+    {% endif %}
+  </form>
+  {% else %}
+  <small>Login to Like Post</small>
+  {% endif %}
+  <!-- The number of likes goes before the closing strong tag -->
+  <span class="text-secondary">{{ post.number_of_likes }} </span>
+</strong>
 {% endif %} {% endblock %}
