@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
-     import env
+    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +30,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-gassama94-foreignroom-o9udp9e1crm.ws-eu104.gitpod.io', 'foreign-room-4472785d13b2.herokuapp.com' , 'foreign-room.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['8000-gassama94-foreignroom-o9udp9e1crm.ws-eu104.gitpod.io',
+                 'foreign-room-4472785d13b2.herokuapp.com', 'foreign-room.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -51,6 +52,12 @@ INSTALLED_APPS = [
     'django_summernote',
     'blog',
 ]
+
+# settings.py
+ACCOUNT_FORMS = {
+    'signup': 'blog.forms.CustomSignupForm',
+}
+
 
 SITE_ID = 1
 
@@ -101,8 +108,8 @@ WSGI_APPLICATION = 'foreignroom.wsgi.application'
 # }
 
 DATABASES = {
-     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
- }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 
 
 # Password validation
