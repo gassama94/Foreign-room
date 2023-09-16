@@ -1,6 +1,7 @@
 from typing import Any
 # from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -9,6 +10,12 @@ from .models import Post
 from .forms import PostForm, EditProfileForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+
+
+class PasswordsChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name = 'change_password.html'
+    success_url = reverse_lazy('home')
 
 
 class UserEditView(UpdateView):
