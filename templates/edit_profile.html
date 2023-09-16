@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+<!--  -->
+{% block htitle %}Edit Profile{% endblock %}
+<!--  -->
+{% block content %}
+<div class="container">
+  <div class="col-md-8 mt-3 offset-md-2">
+    <h1>Edit Profile</h1>
+    <br /><br />
+    <form class="signup" method="POST">
+      {% csrf_token %}
+      <!--  -->
+      {{ form.as_p }}
+      <input
+        type="hidden"
+        name="{{ redirect_field_name }}"
+        value="{{ redirect_field_value }}"
+      />
+      <!--  -->
+      <button type="submit" class="btn btn-primary">
+        Edit Profile &raquo;
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

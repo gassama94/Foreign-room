@@ -25,7 +25,7 @@
         </i>
         <br />
         <hr />
-        <div>{{ post.content|safe }}</div>
+        <div>{{ post.content|slice:":200"|safe }}</div>
       </li>
       {% endfor %}
     </ul>

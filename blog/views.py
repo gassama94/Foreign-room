@@ -1,14 +1,28 @@
 from typing import Any
-from django.shortcuts import render, get_object_or_404
+# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserChangeForm
+from django.db import models
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+#from .views import UserEditView
 from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
-# Create your views here.
-# def home(request):
-# return render(request, 'home.html', {})
+
+
+class UserEditView(UpdateView):
+    form_class = UserChangeForm
+    template_name = 'edit_profile.html'
+    success_url = reverse_lazy('home')
+
+
+    def get_object(self):
+         return self.request.user
+
+
+
 
 
 def LikeView(request, pk):

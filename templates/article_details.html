@@ -20,7 +20,7 @@
 </small>
 <hr />
 <br />
-{{ post.content|safe }}
+{{ post.content|slice:":200"|safe }}
 <br />
 <br />
 <a href="{% url 'home' %}" class="btn btn-primary">Back</a>

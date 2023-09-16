@@ -57,7 +57,10 @@ INSTALLED_APPS = [
 # settings.py
 ACCOUNT_FORMS = {
     'signup': 'blog.forms.CustomSignupForm',
+   
 }
+# settings.py
+#AUTH_USER_MODEL = 'blog.UserEditView'
 
 
 SITE_ID = 1
