@@ -2,7 +2,7 @@ from django.urls import path
 # from allauth.account.views import LoginView
 from . import views
 from django.contrib.auth import views as auth_views
-from .views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, LikeView, UserEditView, PasswordsChangeView
+from .views import HomeView, ArticleDetailView, AddPostView, UpdatePostView, DeletePostView, LikeView, UserEditView, PasswordsChangeView, PostList
 
 urlpatterns = [
     path('', HomeView.as_view(), name="home"),
@@ -16,5 +16,6 @@ urlpatterns = [
     # path('password/', auth_views.PasswordChangeView.as_view(
     # template_name='account/password_change.html'), name='password'),
     path('password/', PasswordsChangeView.as_view(
-        template_name='change_password.html')),
+        template_name='account/password_change.html')),
+    path('', PostList.as_view(), name='post_list'),
 ]

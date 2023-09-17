@@ -39,6 +39,8 @@ class Post(models.Model):
         return self.likes.count()
 
 
+
+
 class Comment(models.Model):
     name = models.CharField(max_length=255, unique=True)
     post = models. ForeignKey(

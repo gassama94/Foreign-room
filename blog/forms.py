@@ -64,3 +64,6 @@ class CustomSignupForm(SignupForm):
         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+
+#####

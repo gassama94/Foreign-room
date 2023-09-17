@@ -2,8 +2,10 @@ from typing import Any
 # from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
+from allauth.account.views import PasswordChangeView
 from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # from .views import UserEditView
 from .models import Post
@@ -14,8 +16,11 @@ from django.http import HttpResponseRedirect
 
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangeForm
-    template_name = 'change_password.html'
+    template_name = 'account/password_change.html'
     success_url = reverse_lazy('home')
+
+    def get_object(self):
+        return self.request.user
 
 
 class UserEditView(UpdateView):
@@ -87,3 +92,11 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
+
+
+
+class PostList(ListView):
+    model = Post
+    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    template_name = "home.html"
+    paginate_by = 6
