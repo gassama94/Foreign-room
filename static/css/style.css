@@ -142,3 +142,6 @@ body {
 }
 
 /* CSS styles to make the footer sticky */
+.footer {
+flex-shrink: 0;
+}

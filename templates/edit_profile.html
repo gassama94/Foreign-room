@@ -7,6 +7,11 @@
   <div class="col-md-8 mt-3 offset-md-2">
     <h1>Edit Profile</h1>
     <br /><br />
+    {% if user.userprofile %}
+    <p>{{ user.userprofile.bio }}</p>
+    {% endif %}
+    <br /><br />
+
     <form class="signup" method="POST">
       {% csrf_token %}
       <!--  -->

@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # from .views import UserEditView
 from .models import Post
-from .forms import PostForm, EditProfileForm
+from .forms import PostForm, EditProfileForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 

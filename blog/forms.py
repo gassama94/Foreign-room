@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 from django.urls import reverse_lazy
 from allauth.account.forms import SignupForm
 from .views import UserChangeForm
@@ -7,13 +7,19 @@ from django.contrib.auth.models import User
 from django.views import generic
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title',
                   'title_tag',
                   'author',
-                  'content')
+                  'content',
+                  'featured_image')
 
 
 widgets = {

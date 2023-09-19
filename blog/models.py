@@ -9,7 +9,12 @@ from ckeditor.fields import RichTextField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 # Create your models here.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
 
+    def __str__(self):
+        return str(self.user)
 
 class Post(models.Model):
     title = models.CharField(max_length=255, unique=True)
