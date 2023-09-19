@@ -12,6 +12,8 @@ STATUS = ((0, "Draft"), (1, "Published"))
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
+    featured_image = CloudinaryField('image', default='placeholder')
+    
 
     def __str__(self):
         return str(self.user)
