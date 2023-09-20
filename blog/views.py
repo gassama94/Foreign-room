@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # from .views import UserEditView
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm, EditProfileForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -59,13 +59,41 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = get_object_or_404(Post, id=self.kwargs['pk'])
+        # post = self.object
 
         liked = False
         if self.request.user.is_authenticated and post.likes.filter(id=self.request.user.id).exists():
             liked = True
 
-            context['liked'] = liked  # Add the 'liked' variable to the context
+        comments = Comment.objects.filter(post=post)
+
+        context['liked'] = liked  # Add the 'liked' variable to the context
+        context['comments'] = comments
+        context['comment_form'] = CommentForm()
         return context
+
+    def post(self, request, **kwargs):
+        # context = super().get_context_data(**kwargs)
+        post = get_object_or_404(Post, id=self.kwargs['pk'])
+        comment_form = CommentForm(data=request.POST)
+
+        # liked = False
+        # if self.request.user.is_authenticated and post.likes.filter(id=self.request.user.id).exists():
+        #     liked = True
+
+        # comments = Comment.objects.filter(post=post)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.email = request.user.email
+            comment.name = request.user.username
+            comment.save()
+            return redirect('article-detail', pk=post.pk)
+
+        context = self.get_context_data(**kwargs)
+        context['commented'] = True
+        context['comment_form'] = CommentForm()
+        return self.render_to_response(context)
 
 
 class AddPostView(CreateView):
@@ -92,7 +120,6 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
-
 
 
 class PostList(ListView):

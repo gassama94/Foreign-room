@@ -9,14 +9,16 @@ from ckeditor.fields import RichTextField
 STATUS = ((0, "Draft"), (1, "Published"))
 
 # Create your models here.
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
     profile_img = models.ImageField(null=True, blank=True, upload_to='images/')
-    
 
     def __str__(self):
         return str(self.user)
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255, unique=True)
@@ -27,7 +29,8 @@ class Post(models.Model):
     content = RichTextField(blank=True, null=True)
     updated_on = models.DateTimeField(auto_now=True)
     # featured_image = CloudinaryField('image', default='placeholder')
-    header_image = models.ImageField(null=True, blank=True, upload_to='images/')
+    header_image = models.ImageField(
+        null=True, blank=True, upload_to='images/')
     # excerpt = models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models. IntegerField(choices=STATUS, default=0)
@@ -47,10 +50,8 @@ class Post(models.Model):
         return self.likes.count()
 
 
-
-
 class Comment(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     post = models. ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments")
     email = models.EmailField()
@@ -62,5 +63,4 @@ class Comment(models.Model):
         ordering = ['-created_on']
 
     def __str__(self):
-        return f"Comment {self.body} by {self.name}"
-
+        return f"Comment {self.post.title} by {self.name}"

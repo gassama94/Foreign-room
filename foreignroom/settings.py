@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+from decouple import config
 from pathlib import Path
 import os
 import dj_database_url
@@ -114,9 +114,13 @@ WSGI_APPLICATION = 'foreignroom.wsgi.application'
 #    }
 # }
 
+
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+
+DATABASE_URL = config('DATABASE_URL')
 
 
 # Password validation

@@ -18,4 +18,5 @@ urlpatterns = [
     path('password/', PasswordsChangeView.as_view(
         template_name='account/password_change.html')),
     path('', PostList.as_view(), name='post_list'),
+
 ]

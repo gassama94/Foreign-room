@@ -1,4 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block title %}{{post.title_tag
+{% extends 'base.html' %}
+<!--  -->
+ {% load static %}
+ <!--  -->
+ {% load crispy_forms_tags %}
+
+ <!--  -->
+  {% block title %}{{post.title_tag
 }}{% endblock %} {% block content %}
 
 <h1>{{ post.title }}</h1>
@@ -27,7 +34,7 @@
 {{ post.content|safe }}
 <br />
 <br />
-<a href="{% url 'home' %}" class="btn btn-primary">Back</a>
+<!-- <a href="{% url 'home' %}" class="btn btn-primary">Back</a> -->
 <br />
 <br />
 <hr />
@@ -64,8 +71,8 @@
   {% endif %}
   <!-- The number of likes goes before the closing strong tag -->
 </strong>
-<br /><br />
-
+<br>
+<hr>
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-2">
@@ -88,6 +95,10 @@
         <h5 class="card-title">
           {{ post.author.first_name }} {{ post.author.last_name }}
         </h5>
+        <p class="small text-muted">
+          <h5>Bio</h5
+          >
+        </p>
         <p class="card-text">{{ post.author.userprofile.bio }}</p>
         <p class="card-text">
           <small class="text-body-secondary">Last updated 3 mins ago</small>
@@ -96,7 +107,24 @@
     </div>
   </div>
 </div>
+<hr>
 
 <br /><br />
+<div class="col-md-4 card mb-4 mt-3">
+  <div class="card-body">
+    {% if user.is_authenticated %} 
+
+    <h2>Comments...</h2>
+    <p>Posting as: {{ user.author }}</p>
+    <form method="post"  style="margin-top: 1.3em;" >
+      {{ comment_form | crispy }}
+      {% csrf_token %}
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+    
+  </div>
+</div>
+
 <!--  -->
+{% endif %}
 {% endblock %}

@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+<!--  -->
+{% load static %} {% block content %}
 
 <h1>Blogs</h1>
 <div class="container-fluid shadow-sm p-3 mb-5 bg-body-tertiary rounded">
@@ -10,13 +12,20 @@
         <div class="card-body">
           <!--  -->
           <div class="image-container">
-            {% if "placeholder" in post.featured_image.url %}
+            {% if user.profile_img.url %}
             <img
               class="card-img-top"
-              src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg"
+              src="{{ user.profile_img.url }}"
+              width="300"
+              height="300"
             />
             {% else %}
-            <img class="card-img-top" src=" {{ post.featured_image.url }}" />
+            <img
+              class="card-img-top"
+              src="{% static 'theblog/images/profile-pic.webp' %}"
+            />
+
+            <!--  -->
             {% endif %}
             <!--  -->
             <div class="image-flash">
