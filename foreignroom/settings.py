@@ -60,7 +60,7 @@ ACCOUNT_FORMS = {
     'signup': 'blog.forms.CustomSignupForm',
 }
 # settings.py
-#AUTH_USER_MODEL = 'blog.UserEditView'
+# AUTH_USER_MODEL = 'blog.UserEditView'
 
 
 SITE_ID = 1
@@ -164,6 +164,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type

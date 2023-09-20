@@ -55,24 +55,33 @@
     >
       Like
     </button>
+
     {% endif %}
+    <span class="text-secondary">{{ post.number_of_likes }} - Likes</span>
   </form>
   {% else %}
   <small>Login to Like Post</small>
   {% endif %}
   <!-- The number of likes goes before the closing strong tag -->
-  <span class="text-secondary">{{ post.number_of_likes }} </span>
 </strong>
 <br /><br />
 
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-2">
+      {% if post.author.userprofile.profile_img.url %}
       <img
         src="{{ post.author.userprofile.profile_img.url }}"
         alt=""
         class="card-img"
       />
+      {% else %}
+      <img
+        src="{% static 'theblog/images/profile-pic.webp' %}"
+        alt=""
+        class="card-img"
+      />
+      {% endif %}
     </div>
     <div class="col-md-10">
       <div class="card-body">
