@@ -18,5 +18,6 @@ urlpatterns = [
     path('password/', PasswordsChangeView.as_view(
         template_name='account/password_change.html')),
     path('', PostList.as_view(), name='post_list'),
+    # path('article/<int:pk>/comment/', views.post_comment, name='post_comment'),
 
 ]

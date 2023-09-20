@@ -112,11 +112,27 @@
 <br /><br />
 <div class="col-md-4 card mb-4 mt-3">
   <div class="card-body">
-    {% if user.is_authenticated %} 
-
     <h2>Comments...</h2>
-    <p>Posting as: {{ user.author }}</p>
-    <form method="post"  style="margin-top: 1.3em;" >
+    <br>
+    {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting approval
+                </div>
+                
+    {% else %}
+    {% for comment in post.comments.all %}
+    <strong>  {{ comment.name }} - {{ comment.created_on }}</strong>
+    
+    <br>
+    {{ comment.body }}
+    <br>
+    <br>
+    {% endfor %}
+
+    {% if user.is_authenticated %} 
+<hr>
+    <p>Posting as: {{ user.username }}</p>
+    <form method="post"  style="margin-top: 1.3em;" action="{% url 'article-detail' pk=post.pk %}">
       {{ comment_form | crispy }}
       {% csrf_token %}
     <button type="submit" class="btn btn-success">Submit</button>
@@ -126,5 +142,6 @@
 </div>
 
 <!--  -->
+{% endif %}
 {% endif %}
 {% endblock %}

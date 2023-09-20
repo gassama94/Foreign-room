@@ -1,5 +1,5 @@
 from typing import Any
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from allauth.account.views import PasswordChangeView
@@ -72,28 +72,43 @@ class ArticleDetailView(DetailView):
         context['comment_form'] = CommentForm()
         return context
 
+
+
     def post(self, request, **kwargs):
         # context = super().get_context_data(**kwargs)
-        post = get_object_or_404(Post, id=self.kwargs['pk'])
-        comment_form = CommentForm(data=request.POST)
+        # queryset = Post.objects.filter(status=1)
+         post = get_object_or_404(Post, id=self.kwargs['pk'])
+         comments = post.comments.filter(approved=True).order_by("-created_on")
+         comment_form = CommentForm(data=request.POST)
 
-        # liked = False
-        # if self.request.user.is_authenticated and post.likes.filter(id=self.request.user.id).exists():
-        #     liked = True
+         liked = False
+         if post.likes.filter(id=self.request.user.id).exists():
+              liked = True
 
-        # comments = Comment.objects.filter(post=post)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.post = post
-            comment.email = request.user.email
-            comment.name = request.user.username
-            comment.save()
-            return redirect('article-detail', pk=post.pk)
+         comments = Comment.objects.filter(post=post)
+         comment_form = CommentForm(data=request.POST)
 
-        context = self.get_context_data(**kwargs)
-        context['commented'] = True
-        context['comment_form'] = CommentForm()
-        return self.render_to_response(context)
+         if comment_form.is_valid():
+             comment_form.instance.email = request.user.email
+             comment_form.instance.name = request.user.username
+             comment = comment_form.save(commit=False)
+             comment.post = post
+             comment.save()
+             return redirect('article-detail', pk=post.pk)
+         else:
+             comment_form = CommentForm()
+
+         return render(
+             request,
+             "article_details.html",
+             {
+                 "post": post,
+                 "comments": comments,
+                 "commented": True,
+                 "comment_form": comment_form,
+               
+             },
+         )
 
 
 class AddPostView(CreateView):
