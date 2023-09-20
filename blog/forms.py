@@ -19,7 +19,7 @@ class PostForm(forms.ModelForm):
                   'title_tag',
                   'author',
                   'content',
-                  'featured_image')
+                  'header_image')
 
 
 widgets = {

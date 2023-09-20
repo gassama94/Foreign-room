@@ -20,8 +20,9 @@
 </small>
 <hr />
 <br />
-{% if "placeholder" in post.featured_image.url %}
-<img src="{{ post.featured_image.url }}" alt="" srcset="" />
+{% if post.header_image %}
+<img src="{{ post.header_image.url }}" alt="" srcset="" />
+{% endif %}
 <!--  -->
 {{ post.content|safe }}
 <br />
@@ -63,14 +64,15 @@
   <span class="text-secondary">{{ post.number_of_likes }} </span>
 </strong>
 <br /><br />
+
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-2">
-      {% if "placeholder" in post.featured_image.url %}
-      <img src="{{ post..featured_image.url }}" alt="" class="rounded-circle" />
-
-      {% endif %}
-      <img src="..." class="img-fluid rounded-start" alt="..." />
+      <img
+        src="{{ post.author.userprofile.profile_img.url }}"
+        alt=""
+        class="card-img"
+      />
     </div>
     <div class="col-md-10">
       <div class="card-body">
@@ -87,7 +89,5 @@
 </div>
 
 <br /><br />
-<!--  -->
-{% endif %}
 <!--  -->
 {% endblock %}
