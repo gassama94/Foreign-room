@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from decouple import config
 from pathlib import Path
+from django.urls import reverse_lazy
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
@@ -61,7 +62,7 @@ ACCOUNT_FORMS = {
 }
 # settings.py
 # AUTH_USER_MODEL = 'blog.UserEditView'
-
+ACCOUNT_CHANGE_PASSWORD_SUCCESS_URL = reverse_lazy('home')
 
 SITE_ID = 1
 
