@@ -1,4 +1,5 @@
 from django.urls import path
+from allauth.account import urls as allauth_urls
 # from allauth.account.views import LoginView
 from . import views
 from django.contrib.auth import views as auth_views
@@ -15,8 +16,8 @@ urlpatterns = [
     path('edit_profile/', UserEditView.as_view(), name="edit_profile"),
     # path('password/', auth_views.PasswordChangeView.as_view(
     # template_name='account/password_change.html'), name='password'),
-    path('password/', PasswordsChangeView.as_view(
-        template_name='account/password_change.html')),
+    path('password/change', PasswordsChangeView.as_view(
+        template_name='account/password_change.')),
     path('', PostList.as_view(), name='post_list'),
     # path('article/<int:pk>/comment/', views.post_comment, name='post_comment'),
 

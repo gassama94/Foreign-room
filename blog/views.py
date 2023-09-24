@@ -17,10 +17,20 @@ from django.http import HttpResponseRedirect
 class PasswordsChangeView(PasswordChangeView):
     form_class = PasswordChangeForm
     template_name = 'account/password_change.html'
-    success_url = reverse_lazy('home')
+    # success_url = reverse_lazy('home')
+    success_url = '/accounts/login/'
+    
 
-    def get_object(self):
-        return self.request.user
+
+    def form_valid(self, form):
+        # Call the parent class's form_valid method to perform the password change
+        response = super().form_valid(form)
+
+        # Redirect to the Allauth login page
+        return redirect(self.get_success_url())
+
+    # def get_object(self):
+    #     return self.request.user
 
 
 class UserEditView(UpdateView):

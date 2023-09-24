@@ -42,7 +42,7 @@ Happy coding!
 
 Welcome to the Foreign-Room Blog project! This README provides an overview of the project's structure and functionality. The blog is designed for information sharing among foreigners, where they can share their experiences in new countries, discuss events, and connect with like-minded people to exchange ideas and assistance. The project includes features such as user authentication, the ability to create, update, delete, and view blog posts, as well as liking posts and leaving comments. live site []
 
-![Alt Text](image-13.png)
+![Front page](image-13.png)
 
 ## Table of Contents
 
@@ -73,6 +73,8 @@ The Foreign-Room Blog project is a web application designed to facilitate inform
 - Connect with Like-Minded People: Users can connect with others who share similar experiences or interests, enabling them to exchange ideas and offer assistance.
 
 ## 2. Agile Development
+
+![Front page](image-2.png)
 
 This project followed Agile development principles to ensure flexibility, collaboration, and iterative progress. Here's how Agile practices were applied:
 
@@ -234,9 +236,13 @@ User authentication is implemented using Django-allauth authentication system. U
 
 ## 8. Creating Blog Posts
 
+![add post](image-3.png)
+
 Registered users can create new blog posts through the "Add Post" feature. They can provide a title, a title tag, and the content of the post. The created post will be associated with the logged-in user.
 
 ## 9. Editing User Profile
+
+![add post](image-6.png)
 
 Registered users can edit their profiles, which include their username and password. This feature allows users to customize their accounts.
 
@@ -245,6 +251,8 @@ Registered users can edit their profiles, which include their username and passw
 Users can like and unlike blog posts. Post pages show the number of likes and allow toggling with the "Like" button.
 
 ## 11. Leaving Comments with django-crispy-forms
+
+![Front page](image-8.png)
 
 Users can leave comments on blog posts. Comments are displayed below each post. Users submit comments with their name and email using `django-crispy-forms` for improved form rendering. Comments can be approved by administrators.
 
@@ -275,6 +283,8 @@ Users can leave comments on blog posts. Comments are displayed below each post. 
 - This operation helps users manage their content effectively.
 
 ## 12. Viewing and Interacting with Posts
+
+![Front page](image-10.png)
 
 - Users can:
   - View Blog Posts: Browse published blog posts on the home page.

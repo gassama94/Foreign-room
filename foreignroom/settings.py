@@ -34,7 +34,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['8000-gassama94-foreignroom-o9udp9e1crm.ws-eu104.gitpod.io',
                  'foreign-room-4472785d13b2.herokuapp.com', 'foreign-room.herokuapp.com', 'localhost']
 
-
+AUTHENTICATION_BACKENDS = [
+    # ...other backends...
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 # Application definition
 
 INSTALLED_APPS = [
