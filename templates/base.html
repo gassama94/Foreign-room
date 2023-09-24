@@ -27,8 +27,26 @@
     <!--  -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- Open Graph (OG) meta tags for social media sharing -->
 
-    <title>{% block title %} Foreign-Room! {% endblock %}</title>
+    <meta
+      property="og:description"
+      content="Welcome to Foreign-Room - Your Source for Amazing Content"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Foreign-Room" />
+
+    <!-- SEO meta tags -->
+    <title>{% block title %}Foreign-Room{% endblock %}</title>
+    <meta
+      name="description"
+      content="Welcome to Foreign-Room - Your Source for Amazing Content"
+    />
+    <meta
+      name="keywords"
+      content="Foreign-Room, blog, articles, content, technology, lifestyle"
+    />
+    <meta name="author" content="Pap-Sheiku Media" />
   </head>
   <body class="h-100 main-bg">
     <!-- navbar Open -->

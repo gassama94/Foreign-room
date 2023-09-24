@@ -15,7 +15,7 @@
       <p>{% trans 'Are you sure you want to sign out?' %}</p>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-8 mt-3 offset-md-2">
       <form method="post" action="{% url 'account_logout' %}">
@@ -76,36 +76,25 @@
   </div>
 </div>
 <!--  -->
-<div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-2">
-      {% if post.user.userprofile.profile_img.url %}
-      <img
-        src="{{ post.user.userprofile.profile_img.url }}"
-        alt=""
-        class="card-img"
-      />
-      {% else %}
-      <img
-        src="{% static 'theblog/images/profile-pic.webp' %}"
-        alt=""
-        class="card-img"
-      />
-      {% endif %}
-    </div>
-    <div class="col-md-10">
-      <div class="card-body">
-        <h5 class="card-title">
-          {{ post.author.first_name }} {{ post.author.last_name }}
-        </h5>
-        <p class="small text-muted">
-          <h5>Bio</h5
-          >
-        </p>
-        <p class="card-text">{{ post.author.userprofile.bio }}</p>
-        <p class="card-text">
-          <small class="text-body-secondary">Last updated 3 mins ago</small>
-        </p>
+<div class="masthead">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-md-6 masthead-text">
+        <!-- Post title goes in these h1 tags -->
+        <h1 class="post-title">Goodbye........!</h1>
+        <!-- Post author goes before the | the post's created date goes after -->
+        <!-- <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p> -->
+      </div>
+      <div class="d-none d-md-block col-md-6 masthead-image">
+        <!-- The featured image URL goes in the src attribute -->
+        {% if "placeholder" in post.featured_image.url %}
+        <img
+          src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg"
+          width="100%"
+        />
+        {% else %}
+        <img src=" {{ post.featured_image.url }}" width="100%" />
+        {% endif %}
       </div>
     </div>
   </div>

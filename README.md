@@ -42,6 +42,8 @@ Happy coding!
 
 Welcome to the Foreign-Room Blog project! This README provides an overview of the project's structure and functionality. The blog is designed for information sharing among foreigners, where they can share their experiences in new countries, discuss events, and connect with like-minded people to exchange ideas and assistance. The project includes features such as user authentication, the ability to create, update, delete, and view blog posts, as well as liking posts and leaving comments. live site []
 
+![Alt Text](image-13.png)
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
