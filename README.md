@@ -1,46 +1,6 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
-
-Welcome,
-
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
-
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **July 26th, 2023**
-
-## Codeanywhere Reminders
-
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
-
-`python3 -m http.server`
-
-A button should appear to click: _Open Preview_ or _Open Browser_.
-
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
-
-`http_server`
-
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
-
-A button should appear to click: _Open Preview_ or _Open Browser_.
-
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
-
----
-
-Happy coding!
-
 # Foreign-Room Blog
 
-Welcome to the Foreign-Room Blog project! This README provides an overview of the project's structure and functionality. The blog is designed for information sharing among foreigners, where they can share their experiences in new countries, discuss events, and connect with like-minded people to exchange ideas and assistance. The project includes features such as user authentication, the ability to create, update, delete, and view blog posts, as well as liking posts and leaving comments. live site []
+Welcome to the Foreign-Room Blog project! This README provides an overview of the project's structure and functionality. The blog is designed for information sharing among foreigners, where they can share their experiences in new countries, discuss events, and connect with like-minded people to exchange ideas and assistance. The project includes features such as user authentication, the ability to create, update, delete, and view blog posts, as well as liking posts and leaving comments. <a href="https://foreign-room-4472785d13b2.herokuapp.com/" target="_blank">Visit My Live Site</a>
 
 ![Front page](image-13.png)
 
@@ -58,7 +18,8 @@ Welcome to the Foreign-Room Blog project! This README provides an overview of th
 10. [Liking Posts](#liking-posts)
 11. [Leaving Comments](#leaving-comments)
 12. [CRUD Operations](#crud-operations)
-13. [Contributing](#contributing)
+13. [Testing Blog Website](#testing-blog-website)
+14. [Contributing](#contributing)
 
 ## 1. Project Overview
 
@@ -291,7 +252,32 @@ Users can leave comments on blog posts. Comments are displayed below each post. 
   - View Individual Posts: Click on post titles to see detailed views.
   - Pagination: Blog posts are paginated for better user experience.
 
-## 13. Contributing
+## 13.Testing Blog Website
+
+| Test Case              | Description                                  | Expected Outcome                    | Actual Outcome                 | Status |
+| ---------------------- | -------------------------------------------- | ----------------------------------- | ------------------------------ | ------ |
+| **Registration**       |                                              |                                     |                                |        |
+| User registration      | Register a new user account                  | Successful registration             | Registration successful        | Pass   |
+| Existing user          | Attempt to register with an existing email   | Error message: Email already in use | Error message received         | Pass   |
+| **Login**              |                                              |                                     |                                |        |
+| User login             | Log in with valid credentials                | Successful login                    | Login successful               | Pass   |
+| Incorrect password     | Log in with an incorrect password            | Error message: Invalid login        | Error message received         | Pass   |
+| **Adding Posts**       |                                              |                                     |                                |        |
+| Add new post           | Create a new blog post                       | Post appears on the homepage        | Post appears on the homepage   | Pass   |
+| Edit post              | Edit an existing blog post                   | Post is updated                     | Post is updated                | Pass   |
+| Delete post            | Delete an existing blog post                 | Post is removed                     | Post is removed                | Pass   |
+| **Likes and Comments** |                                              |                                     |                                |        |
+| Like post              | Like a blog post                             | Like count increases by 1           | Like count increases by 1      | Pass   |
+| Unlike post            | Unlike a previously liked blog post          | Like count decreases by 1           | Like count decreases by 1      | Pass   |
+| Add comment            | Add a comment to a blog post                 | Comment appears under the post      | Comment appears under the post | Pass   |
+| **Profile**            |                                              |                                     |                                |        |
+| Edit profile           | Edit user profile information                | Profile information updated         | Profile information updated    | Pass   |
+| Upload profile image   | Add or change profile image                  | Image appears on the profile        | Image appears on the profile   | Pass   |
+| **Security**           |                                              |                                     |                                |        |
+| Unauthorized access    | Access restricted content without logging in | Redirect to login page              | Redirected to login page       | Pass   |
+| **Responsiveness**     | Test on various devices and screen sizes     | Proper display on all devices       | Proper display on all devices  | Pass   |
+
+## 14. Contributing
 
 Contributing to this project is welcome and encouraged! Here's how to get started:
 

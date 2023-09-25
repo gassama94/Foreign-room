@@ -4,14 +4,13 @@
 
 <!--  -->
 {% block title %}{{post.title_tag }}{% endblock %} {% block content %}
+<div class="border p-4">
+
+
 <div class="masthead">
   <div class="container">
     <div class="row g-0">
       <div class="col-md-6 masthead-text">
-        <!-- Post title goes in these h1 tags -->
-        <!-- <h1 class="post-title">{{ post.title }}</h1> -->
-        <!-- Post author goes before the | the post's created date goes after -->
-        <!-- <p class="post-subtitle">{{ post.author }} | {{ post.created_on }}</p> -->
       </div>
       <div class="d-none d-md-block col-md-6 masthead-image">
         <!-- The featured image URL goes in the src attribute -->
@@ -51,7 +50,7 @@
 {{ post.content|safe }}
 <br />
 <br />
-<!-- <a href="{% url 'home' %}" class="btn btn-primary">Back</a> -->
+
 <br />
 <br />
 <hr />
@@ -159,4 +158,5 @@
 </div>
 
 <!--  -->
+</div>
 {% endif %} {% endif %} {% endblock %}
