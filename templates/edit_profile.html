@@ -1,27 +1,39 @@
 {% extends "base.html" %}
-<!--  -->
+
+<!-- Setting the page title -->
 {% block title %}Edit Profile{% endblock %}
-<!--  -->
+
+<!-- Main content of the page -->
 {% block content %}
 <div class="container">
+
+  <!-- Centralized form for profile editing -->
   <div class="col-md-8 mt-3 offset-md-2">
     <h1>Edit Profile</h1>
     <br /><br />
+
+    <!-- Display user profile bio if it exists -->
     {% if user.userprofile %}
     <p>{{ user.userprofile.bio }}</p>
     {% endif %}
     <br /><br />
 
+    <!-- Form to edit profile details -->
     <form class="signup" method="POST">
+      <!-- CSRF token for form security -->
       {% csrf_token %}
-      <!--  -->
+
+      <!-- Rendering form fields -->
       {{ form.as_p }}
+
+      <!-- Hidden input to ensure correct redirection after form submission -->
       <input
         type="hidden"
         name="{{ redirect_field_name }}"
         value="{{ redirect_field_value }}"
       />
-      <!--  -->
+
+      <!-- Submit button for the form -->
       <button type="submit" class="btn btn-primary">
         Edit Profile &raquo;
       </button>
@@ -31,5 +43,4 @@
     </form>
   </div>
 </div>
-
 {% endblock %}

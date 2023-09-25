@@ -1,162 +1,153 @@
 {% extends 'base.html' %}
-<!--  -->
-{% load static %} {% load crispy_forms_tags %}
 
-<!--  -->
-{% block title %}{{post.title_tag }}{% endblock %} {% block content %}
+{% load static %} 
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {{post.title_tag }}
+{% endblock %} 
+
+{% block content %}
+
 <div class="border p-4">
 
-
-<div class="masthead">
-  <div class="container">
-    <div class="row g-0">
-      <div class="col-md-6 masthead-text">
-      </div>
-      <div class="d-none d-md-block col-md-6 masthead-image">
-        <!-- The featured image URL goes in the src attribute -->
-        {% if "placeholder" in post.featured_image.url %}
-        <img
-          src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg"
-          width="100%"
-        />
-        {% else %}
-        <img src=" {{ post.featured_image.url }}" width="100%" alt="laptop image" />
-        {% endif %}
-      </div>
-    </div>
-  </div>
-</div>
-<hr />
-<h1>{{ post.title }}</h1>
-<small>
-  By:{{ post.author.first_name }} {{ post.author.last_name }}
-  <!--  -->
-  {% if user.is_authenticated %}
-  <!--  -->
-  {% if user.id == post.author.id %}
-
-  <a href="{% url 'update_post' post.pk %}">(Edit)</a>
-  <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
-  <!--  -->
-  {% endif %} {% endif %}
-</small>
-<br />
-<small>
-  <i> {{ post.created_on }} </i>
-</small>
-<hr />
-<br />
-<!--  -->
-{{ post.content|safe }}
-<br />
-<br />
-
-<br />
-<br />
-<hr />
-<br />
-<strong>
-  {% if user.is_authenticated %}
-  <form action="{% url 'like_post' post.pk %}" method="POST">
-    {% csrf_token %}
-    <!--  -->
-    {% if liked %}
-    <button
-      type="submit"
-      name="post_id"
-      value="{{post.id}}"
-      class="btn btn-danger"
-    >
-      Unlike
-    </button>
-    {% else %}
-    <button
-      type="submit"
-      name="post_id"
-      value="{{post.id}}"
-      class="btn btn-success"
-    >
-      Like
-    </button>
-
-    {% endif %}
-    <span class="text-secondary">{{ post.number_of_likes }} - Likes</span>
-  </form>
-  {% else %}
-  <small>Login to Like Post</small>
-  {% endif %}
-  <!-- The number of likes goes before the closing strong tag -->
-</strong>
-<br />
-<hr />
- <div class="card mb-3">
-  <div class="row g-0">
-    <div class="col-md-2">
-      {% if post.author.userprofile.profile_img.url %}
-      <img
-        src="{{ post.author.userprofile.profile_img.url }}"
-        alt="profile image"
-        class="card-img"
-      />
-      {% else %}
-      <img
-        src="/static/theblog/images/profile-pic.webp"
-        alt="profile image"
-        class="card-img"
-      />
-      {% endif %}
-    </div>
-    <div class="col-md-10">
-      <div class="card-body">
-        <h5 class="card-title">
-          {{ post.author.first_name }} {{ post.author.last_name }}
-        </h5>
-        <p class="small text-muted">
-          <h5>Bio</h5
-          >
-        </p>
-        <p class="card-text">{{ post.author.userprofile.bio }}</p>
-        <p class="card-text">
-          <small class="text-body-secondary">Last updated 3 mins ago</small>
-        </p>
-      </div>
-    </div>
-  </div>
-</div> 
-
-<hr />
-
-<br /><br />
-<div class="col-md-4 card mb-4 mt-3">
-  <div class="card-body">
-    <h2>Comments...</h2>
-    <br />
-    {% if commented %}
-    <div class="alert alert-success" role="alert">
-      Your comment is awaiting approval
+    <!-- Masthead: Displays the feature image -->
+    <div class="masthead">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 masthead-text"></div>
+                <div class="d-none d-md-block col-md-6 masthead-image">
+                    <!-- Check if the default placeholder is in the URL -->
+                    {% if "placeholder" in post.featured_image.url %}
+                        <img src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg" width="100%" />
+                    {% else %}
+                        <img src="{{ post.featured_image.url }}" width="100%" alt="laptop image" />
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 
-    {% else %} {% for comment in post.comments.all %}
-    <strong> {{ comment.name }} - {{ comment.created_on }}</strong>
-
-    <br />
-    {{ comment.body }}
-    <br />
-    <br />
-    {% endfor %} {% if user.is_authenticated %}
     <hr />
-    <p>Posting as: {{ user.username }}</p>
-    <form
-      method="post"
-      style="margin-top: 1.3em"
-      action="{% url 'article-detail' pk=post.pk %}"
-    >
-      {{ comment_form | crispy }} {% csrf_token %}
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
+
+    <!-- Blog Post Title -->
+    <h1>{{ post.title }}</h1>
+
+    <!-- Blog Post Author Details -->
+    <small>
+        By:{{ post.author.first_name }} {{ post.author.last_name }}
+        
+        <!-- Show Edit & Delete only if user is the author -->
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <a href="{% url 'update_post' post.pk %}">(Edit)</a>
+                <a href="{% url 'delete_post' post.pk %}">(Delete)</a>
+            {% endif %}
+        {% endif %}
+    </small>
+    <br />
+
+    <!-- Blog Post Creation Date -->
+    <small>
+        <i> {{ post.created_on }} </i>
+    </small>
+
+    <hr />
+    <br />
+
+    <!-- Blog Post Content -->
+    {{ post.content|safe }}
+
+    <br /><br /><br /><br />
+    <hr /><br />
+
+    <!-- Like Button Section -->
+    <strong>
+        {% if user.is_authenticated %}
+            <form action="{% url 'like_post' post.pk %}" method="POST">
+                {% csrf_token %}
+                
+                <!-- Toggle Like/Unlike based on whether the post is liked -->
+                {% if liked %}
+                    <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-danger">Unlike</button>
+                {% else %}
+                    <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-success">Like</button>
+                {% endif %}
+                
+                <span class="text-secondary">{{ post.number_of_likes }} - Likes</span>
+            </form>
+        {% else %}
+            <small>Login to Like Post</small>
+        {% endif %}
+    </strong>
+
+    <br />
+    <hr />
+
+    <!-- Author's Profile Section -->
+    <div class="card mb-3">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <!-- Display Author's Profile Picture or Default -->
+                {% if post.author.userprofile.profile_img.url %}
+                    <img src="{{ post.author.userprofile.profile_img.url }}" alt="profile image" class="card-img" />
+                {% else %}
+                    <img src="/static/theblog/images/profile-pic.webp" alt="profile image" class="card-img" />
+                {% endif %}
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{ post.author.first_name }} {{ post.author.last_name }}
+                    </h5>
+                    <p class="small text-muted"><h5>Bio</h5></p>
+                    <p class="card-text">{{ post.author.userprofile.bio }}</p>
+                    <p class="card-text">
+                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <br /><br />
+
+    <!-- Comment Section -->
+    <div class="col-md-4 card mb-4 mt-3">
+        <div class="card-body">
+            <h2>Comments...</h2>
+            <br />
+            
+            <!-- Display Message if Comment is Waiting for Approval -->
+            {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting approval
+                </div>
+            {% else %}
+                <!-- Display All Comments -->
+                {% for comment in post.comments.all %}
+                    <strong> {{ comment.name }} - {{ comment.created_on }}</strong>
+                    <br />
+                    {{ comment.body }}
+                    <br /><br />
+                {% endfor %}
+                
+                <!-- Comment Form -->
+                {% if user.is_authenticated %}
+                    <hr />
+                    <p>Posting as: {{ user.username }}</p>
+                    <form method="post" style="margin-top: 1.3em" action="{% url 'article-detail' pk=post.pk %}">
+                        {{ comment_form | crispy }} 
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
 </div>
 
-<!--  -->
-</div>
-{% endif %} {% endif %} {% endblock %}
+{% endblock %}

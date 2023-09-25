@@ -19,6 +19,8 @@ Welcome to the Foreign-Room Blog project! This README provides an overview of th
 11. [Leaving Comments](#leaving-comments)
 12. [CRUD Operations](#crud-operations)
 13. [Testing Blog Website](#testing-blog-website)
+14. [Deployment](#deployment)
+14. [Credits](#credits)
 14. [Contributing](#contributing)
 
 ## 1. Project Overview
@@ -277,22 +279,132 @@ Users can leave comments on blog posts. Comments are displayed below each post. 
 | Unauthorized access    | Access restricted content without logging in | Redirect to login page              | Redirected to login page       | Pass   |
 | **Responsiveness**     | Test on various devices and screen sizes     | Proper display on all devices       | Proper display on all devices  | Pass   |
 
-## 14. Contributing
+### Testing Documentation 
+In the journey of building the blog, ensuring the reliability of my code was very mportant. Therefore, i embarked on a systematic testing process that encompassed the models, forms, and views. Here's a comprehensive breakdown of our testing journey.
 
-Contributing to this project is welcome and encouraged! Here's how to get started:
+### Testing Models
+**UserProfile, Post, and Comment Models**
+1. Creation and Retrieval:
+For each model, instances were created with all the required fields. Subsequently, I retrieved these instances from the database to ensure that the saving and fetching mechanisms were functioning properly.
 
-1. **Fork the Repository**: Click the "Fork" button at the top right of the repository's page on GitHub to create your own copy.
+2. Methods and Properties:
+For the Post model, we particularly verified the number_of_likes method. I added a few 'likes' to the post and then invoked the method to ensure that it returned the accurate count.
 
-2. **Clone Your Forked Repository**: Use `git clone` to clone your fork to your local machine.
+3. Relationship Checks:
+Given the ForeignKey relationship between the Post and Comment models (a post can have multiple comments), I ensured that comments were correctly linked to their respective posts.
 
-3. **Create a New Branch for Your Contribution**: Use a descriptive name for your branch, e.g., `feature/my-new-feature` or `fix/issue-123`.
+### Testing Forms
+**CommentForm, PostForm, EditProfileForm, and CustomSignupForm**
+1. Field Validations:
+I populated the forms with both valid and invalid data. For instance, with PostForm, I experimented by leaving out the title to see if the form's validation would catch the error. As expected, the form reported as invalid, signaling our validation rules were effective.
 
-4. **Make Changes and Commit**: Implement your changes or fixes and commit them to your branch.
+2. Crispy Forms Styling:
+Given my integration with crispy-forms for better form rendering, I visually inspected each form on the frontend to ensure the styling was consistently applied and visually appealing.
 
-5. **Push Your Branch to Your GitHub Fork**: Use `git push` to push your branch to your fork on GitHub.
+### Testing Views
+**HomeView, ArticleDetailView, AddPostView, and others**
+1. HTTP Status Codes:
+Every view was accessed to see if it returned the expected HTTP status codes. For instance, the HomeView should always return a 200 status code for valid requests.
 
-6. **Create a Pull Request to the Original Repository**: Visit the original repository on GitHub and click the "New Pull Request" button. Provide a clear title and description for your pull request.
+2. Context Data:
+We also inspected the context data returned by views. For example, the HomeView should return a list of posts. We checked both the existence and accuracy of this data.
 
-7. **Wait for Review and Approval**: Project maintainers will review your pull request. Be ready to make any requested changes.
+3. User Interactions:
+Interactions like liking a post through the LikeView were also tested. After performing a 'like' action, we cross-verified if the post's like count increased in the database.
 
-Thank you for considering contributing to the Django Blog project!
+By the end of my testing journey, i felt more confident in the stability of our the blog application.  manual, meticulous testing gave me invaluable insights and ensured the application's core functionalities were working.
+
+### Known Bugs and Issues
+As of the latest update, the following are some known bugs and issues within the blog application:
+
+### Heroku Image Hosting:
+- **Description:** Heroku, being an ephemeral file system, doesn't support persistent hosting of media files. Any uploaded images might disappear after some time.
+Status: Confirmed. We recommend users to utilize external services like Cloudinary or Amazon S3 for image hosting in Django apps hosted on Heroku.
+
+### Change Password Redirection:
+- **Description:** After users change their passwords, they aren't redirected to the login page.
+Status: Identified. We're working on fixing the redirection flow.
+
+### Image Uploading:
+- **Description:** Occasionally, users might face issues when uploading images.
+Status: Under investigation. A potential solution is to increase the upload limit or provide an image compression feature.
+
+### Comment Section:
+- **Description:** Comments might take a few seconds to appear after posting.
+Status: Identified. This is due to the delay in refreshing the cache. We're working on optimizing this process.
+
+### User Profile Editing:
+- **Description:** Some users have reported issues when trying to update their profile image.
+Status: Confirmed. A fix is currently in development.
+
+Certainly, given the Django settings for the `foreignroom` project and the deployment process detailed earlier, here's a refined deployment process specifically tailored for your Django project:
+
+
+---
+
+## 14.Deployment
+
+Greetings, fellow developers! Here's a step-by-step guide on how I deployed the `foreignroom` project manually through the Heroku dashboard. If you're looking to tread the same path, I hope this serves as a handy roadmap:
+
+#### 1. **Setup: Preparing the Ground**
+Before we commence:
+- Ensure you have a Heroku account. If you haven't, kindly [create one here](https://signup.heroku.com/).
+- Ensure your Django project is under Git control. Remember, Heroku is intertwined with Git.
+
+#### 2. **Initiating a Heroku App**
+- Log in to your Heroku account.
+- On your dashboard, tap the `New` button on the top right.
+- Select `Create New App` from the dropdown.
+- Bestow your app with a unique name and pick your preferred region.
+
+#### 3. **Safeguarding Secrets with Environment Variables**
+Within the Heroku dashboard:
+- Navigate to the `Settings` tab of your app.
+- Find and click on the `Reveal Config Vars` button.
+- Enter the necessary keys and their corresponding values. For instance:
+  - `SECRET_KEY`: Your Django secret key.
+- Given the integration with Cloudinary for media storage, ensure you've set up the `CLOUDINARY_URL`.
+
+#### 4. **Heroku & PostgreSQL: A Seamless Pair**
+For `foreignroom`, I opted for PostgreSQL. Here's how to get it running on Heroku:
+- On your app's dashboard, navigate to the `Resources` tab.
+- Search for `Heroku Postgres` and add it (the free `Hobby Dev` tier should suffice for starters).
+
+#### 5. **Linking the GitHub Repository**
+I love the seamless GitHub-Heroku integration. Here's how I set it up:
+- On your app's dashboard, tap the `Deploy` tab.
+- Choose `GitHub` as the deployment method and confirm the connection.
+- Search and select your `foreignroom` repository.
+- Under the `Manual deploy` section, pick the desired branch and deploy it.
+- Opt for `Enable Automatic Deploys` if you wish for automatic updates based on your repo's changes.
+
+#### 6. **Migration & Superuser Creation**
+To get our database structures in line:
+- Tap the `More` button on the top right of your app's dashboard.
+- Choose `Run console` and type in `python manage.py migrate`.
+- Likewise, create a superuser via `python manage.py createsuperuser`.
+
+#### 7. **Ensuring Smooth Operations**
+Once everything's in place:
+- Access your live site by tapping the `Open app` button.
+- Engage in a thorough check of your site. All corners should be functioning perfectly.
+
+#### 8. **Words of Gratitude**
+My expedition wasn't solitary. Many platforms and tools were companions on this journey. The Credits section delves deeper into this gratitude-filled terrain.
+
+## 15.Credits:
+Blog Website developed by Saikou Gassama.
+Design and layout inspired by various online web templates.
+Acknowledgements:
+OpenAI for GPT-3's assistance in generating some content and code examples.
+Django for the powerful web framework used to build this blog.
+Youtube.
+Heroku for hosting.
+GitHub for version control and repository hosting.
+The Django community, Stack Overflow, and online developer communities for their invaluable resources.
+Special thanks to educational platforms and tutorials that have guided me in building this project.
+
+I wish you an effortless deployment and a project that flourishes on the web! Here's to code that creates, connects, and contributes! 🌟🚀
+
+## License:
+This blog website project is licensed under the MIT License. Modify, customize, and share it as you see fit. Always attribute the original creator!

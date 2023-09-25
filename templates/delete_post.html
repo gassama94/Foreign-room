@@ -1,32 +1,44 @@
-{% extends 'base.html' %} {% block title %}Delete Blog Post{% endblock %}
+{% extends 'base.html' %}
 
-<br />
+<!-- Set the title for this page -->
+{% block title %}Delete Blog Post{% endblock %}
+
 {% block content %}
-<!--  -->
+
+<!-- Check if the user is logged in -->
 {% if user.is_authenticated %}
-<!--  -->
-{% if user.id == post.author.id %}
-<h1>Delete Post....!</h1>
-<br />
-<h3>Delete: {{ post.title }}</h3>
-<div>
-  <div class="form-group">
-    <form method="POST">
-      {% csrf_token %}
-      <br />
-      <strong>Are you sure?</strong>
-      <br />
-      <br />
-      <button class="btn btn-primary">Delete</button>
-    </form>
-  </div>
-</div>
+
+  <!-- Ensure that the user is the author of the post to grant deletion rights -->
+  {% if user.id == post.author.id %}
+
+    <h1>Delete Post....!</h1>
+    <br />
+    <h3>Delete: {{ post.title }}</h3>
+    
+    <!-- Form to confirm deletion -->
+    <div>
+      <div class="form-group">
+        <form method="POST">
+          <!-- CSRF token for form security -->
+          {% csrf_token %}
+          <br />
+          <strong>Are you sure?</strong>
+          <br />
+          <br />
+          <!-- Button to submit the form and delete the post -->
+          <button class="btn btn-primary">Delete</button>
+        </form>
+      </div>
+    </div>
+
+  <!-- If the user is not the author of the post, display an error message -->
+  {% else %}
+    <h1>You're not allowed here!!!</h1>
+  {% endif %}
+
+<!-- If the user is not logged in, display an error message -->
 {% else %}
-<h1>You're not allowed here!!!</h1>
+  <h1>You're not allowed here!!!</h1>
 {% endif %}
-<!--  -->
-{% else %}
-<h1>You're not allowed here!!!</h1>
-{% endif %}
-<br />
+
 {% endblock %}
