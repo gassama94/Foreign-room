@@ -63,5 +63,25 @@ block head_title %}{% trans "Sign In" %}
     </p>
   </strong>
 </div>
+<!-- Masthead with a goodbye message and featured image -->
+<div class="masthead">
+  <div class="container">
+    <div class="row g-0">
+      <div class="col-md-6 masthead-text">
+        <h1 class="post-title">Wellcome........!</h1>
+      </div>
+      <div class="d-none d-md-block col-md-6 masthead-image">
+        {% if "placeholder" in post.featured_image.url %}
+        <img
+          src="https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg"
+          width="100%"
+        />
+        {% else %}
+        <img src="{{ post.featured_image.url }}" width="100%" />
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
 <br /><br />
 {% endblock %}
